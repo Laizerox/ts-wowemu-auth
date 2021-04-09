@@ -1,6 +1,6 @@
 {
   "name": "ts-wowemu-auth",
-  "version": "0.0.0-development",
+  "version": "1.0.2",
   "description": "Wowemu compliant SRP6 auth implementation",
   "keywords": [
     "wowemu",
