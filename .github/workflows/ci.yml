@@ -3,50 +3,43 @@ name: ci
 on:
   push:
     branches:
-      - main
       - master
   pull_request:
     branches:
-      - main
       - master
 
 jobs:
   ci:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [14]
-
+    name: Lint & Test
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎
+      - name: Checkout
         uses: actions/checkout@master
 
-      - name: Setup node env 🏗
+      - name: Setup node env
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 14
           check-latest: true
 
-      - name: Get yarn cache directory path 🛠
+      - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node_modules 📦
+      - name: Cache node_modules
         uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies 👨🏻‍💻
+      - name: Install dependencies
         run: yarn
 
-      - name: Run linter 👀
+      - name: Run linter
         run: yarn lint
 
-      - name: Run tests 🧪
+      - name: Run tests
         run: yarn test

@@ -1,6 +1,6 @@
 {
   "name": "ts-wowemu-auth",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "Wowemu compliant SRP6 auth implementation",
   "keywords": [
     "wowemu",
@@ -10,7 +10,7 @@
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Laizerox/ts-wowemu-auth.git"
+    "url": "https://github.com/Laizerox/ts-wowemu-auth.git"
   },
   "bugs": {
     "url": "https://github.com/Laizerox/ts-wowemu-auth/issues"
@@ -23,9 +23,20 @@
     "dist/index.es.js",
     "dist/index.d.ts"
   ],
+  "release": {
+    "plugins": [
+      "@semantic-release/changelog",
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/github",
+      "@semantic-release/npm",
+      "@semantic-release/release-notes-generator"
+    ],
+    "tagFormat": "${version}"
+  },
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint --ignore-path .gitignore ./src",
+    "semantic-release": "semantic-release",
     "test": "jest --ci"
   },
   "dependencies": {
@@ -36,6 +47,12 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.1",
+    "@semantic-release/npm": "^7.1.1",
+    "@semantic-release/release-notes-generator": "^9.0.2",
     "@types/create-hash": "^1.2.2",
     "@types/jest": "^26.0.22",
     "@types/jsbn": "^1.2.29",
@@ -58,6 +75,7 @@
     "rollup-plugin-dts": "^3.0.1",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-uglify": "^6.0.4",
+    "semantic-release": "^17.4.2",
     "ts-jest": "^26.5.4",
     "typescript": "^4.2.3"
   }
